@@ -140,7 +140,7 @@ class GLSurfaceMachine: StateMachine<GLSurfaceState, GLSurfaceAction> {
     }
 
     private fun drawFrame(state: DrawingAvailable) {
-        drawDrawable(state)
+        //drawDrawable(state)
 
         state.uiHolder.openGLScene?.updateFrame()
         state.uiHolder.encoderDrawingCaller?.invoke()

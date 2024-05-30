@@ -125,12 +125,12 @@ class OpenGLScene(
             uMvpHandler = uMVPMatrixHandle
         )
 
-        smallTexture.updateFrame(
-            aPositionHandle = aPositionHandle,
-            aTextureCoordHandler = aTextureCoordHandler,
-            uTexHandler = uTexMatrixHandle,
-            uMvpHandler = uMVPMatrixHandle
-        )
+//        smallTexture.updateFrame(
+//            aPositionHandle = aPositionHandle,
+//            aTextureCoordHandler = aTextureCoordHandler,
+//            uTexHandler = uTexMatrixHandle,
+//            uMvpHandler = uMVPMatrixHandle
+//        )
     }
 
     companion object {
