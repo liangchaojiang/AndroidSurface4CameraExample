@@ -21,10 +21,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var glSurfaceView2: GLSurfaceView
     private lateinit var glSurfaceView3: GLSurfaceView
 
-    private val glSurfaceMachine = GLSurfaceMachine()
-    private val glSurfaceMachine1 = GLSurfaceMachine()
-    private val glSurfaceMachine2 = GLSurfaceMachine()
-    private val glSurfaceMachine3 = GLSurfaceMachine()
+    private val glSurfaceMachine = GLSurfaceMachine("0")
+    private val glSurfaceMachine1 = GLSurfaceMachine("1")
+    private val glSurfaceMachine2 = GLSurfaceMachine("2")
+    private val glSurfaceMachine3 = GLSurfaceMachine("3")
     private val cameraMachine = CameraMachine("0")
     private val cameraMachine1 = CameraMachine("1")
     private val cameraMachine2 = CameraMachine("2")

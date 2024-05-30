@@ -2,17 +2,24 @@ package com.example.surfaces.machines
 
 import android.graphics.drawable.Drawable
 import android.opengl.GLSurfaceView
+import android.util.Log
 import com.example.surfaces.helpers.OpenGLScene
-import com.example.surfaces.machines.GLSurfaceAction.*
-import com.example.surfaces.machines.GLSurfaceState.*
+import com.example.surfaces.machines.GLSurfaceAction.Create
+import com.example.surfaces.machines.GLSurfaceAction.Draw
+import com.example.surfaces.machines.GLSurfaceAction.Start
+import com.example.surfaces.machines.GLSurfaceAction.Stop
+import com.example.surfaces.machines.GLSurfaceAction.SurfaceReady
+import com.example.surfaces.machines.GLSurfaceState.DrawingAvailable
+import com.example.surfaces.machines.GLSurfaceState.WaitingCreate
+import com.example.surfaces.machines.GLSurfaceState.WaitingSurfaceReady
 import com.example.surfaces.utils.SimpleProducer
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
 
-class GLSurfaceMachine: StateMachine<GLSurfaceState, GLSurfaceAction> {
+class GLSurfaceMachine(camId:String): StateMachine<GLSurfaceState, GLSurfaceAction> {
 
     override var state: GLSurfaceState = WaitingCreate()
-
+    private var camMId = camId
     val fullscreenProducer = SimpleProducer {
         val mh = this@GLSurfaceMachine.state.uiHolder
         mh.openGLScene?.fullscreenTexture
@@ -138,10 +145,18 @@ class GLSurfaceMachine: StateMachine<GLSurfaceState, GLSurfaceAction> {
             gl = action.gl
         )
     }
-
+    private var pCBCount:Int = 0
+    private var startTimeNs: Long = 0
+    private  var endTimeNs: Long = 0
     private fun drawFrame(state: DrawingAvailable) {
         //drawDrawable(state)
-
+        endTimeNs = System.nanoTime()
+        pCBCount++
+        if (endTimeNs - startTimeNs > 1000000000) {
+            startTimeNs = endTimeNs
+            Log.d("liangchao", "cameraID = $camMId onImageAvailable fps = $pCBCount")
+            pCBCount = 0
+        }
         state.uiHolder.openGLScene?.updateFrame()
         state.uiHolder.encoderDrawingCaller?.invoke()
     }

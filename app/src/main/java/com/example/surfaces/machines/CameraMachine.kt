@@ -19,7 +19,7 @@ import kotlin.math.abs
 class CameraMachine(cameraMId: String?) : StateMachine<CameraState, CameraAction> {
 
     override var state : CameraState = CameraState.WaitingStart()
-    private val handlerThread = HandlerThread("camera handler thread")
+    private val handlerThread = HandlerThread("camera handler thread $cameraMId")
     private val handler: Handler
     private var cameraId = cameraMId
     init {
